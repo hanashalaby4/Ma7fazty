@@ -66,60 +66,51 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Sign Up'),
+    @override
+    Widget build(BuildContext context) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text('Sign Up'),
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              'Welcome to Ma7fazti!',
-              style: TextStyle(
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold,
-              ),
+            CustomText(
+              text: 'Welcome to Ma7fazti!',
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
             ),
             SizedBox(height: 16.0),
-            TextField(
+              CustomTextField(
               controller: _emailController,
-              decoration: InputDecoration(
-                labelText: 'Email',
-              ),
+              labelText: 'Email',
             ),
-            SizedBox(height: 16.0),
-            TextField(
+             SizedBox(height: 16.0),
+              CustomTextField(
               controller: _passwordController,
-              decoration: InputDecoration(
-                labelText: 'Password',
-              ),
-              obscureText: true,
+              labelText: 'Password',
+            ),
+             SizedBox(height: 16.0),
+              CustomButton(
+                text: 'Sign Up',
+                onPressed: _signUp,
             ),
             SizedBox(height: 16.0),
-            ElevatedButton(
-              child: Text('Sign Up'),
-              onPressed: _signUp,
-            ),
-            SizedBox(height: 16.0),
-            ElevatedButton(
-              child: Text('Already have an account? Sign In'),
+              CustomButton(
+              text: 'Already have an account? Sign In',
               onPressed: _goToSignInPage,
             ),
             SizedBox(height: 18.0),
-            Text(
-              _message,
-              style: TextStyle(
-                color: Colors.red,
-                fontWeight: FontWeight.bold,
+              CustomText(
+              text: _message,
+              color: Colors.red,
+              fontWeight: FontWeight.bold,
               ),
-            ),
-          ],
-        ),
-      ),
-    );
+            ],
+          ),
+         ),
+       );
+     }
   }
-}
