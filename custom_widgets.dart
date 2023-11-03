@@ -30,13 +30,15 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final String labelText;
   final bool obscureText;
+  final bool keyboardType;
 
   const CustomTextField ({
     Key? key,
     required this.controller,
     required this.labelText,
     this.obscureText = false,
-  }) : super(key: key);
+    this.keyboardType =
+ }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

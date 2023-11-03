@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'custom_widgets.dart';
 class ExpenseEntryPage extends StatefulWidget {
   @override
   _ExpenseEntryPageState createState() => _ExpenseEntryPageState();
 }
 
 class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
-  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
   String? selectedCategory;
-  final TextEditingController _amountController = TextEditingController();
+  final TextEditingController amountController = TextEditingController();
   DateTime? selectedDateTime;
 
-  void _addExpense() {
-    String name = _nameController.text;
-    double amount = double.parse(_amountController.text);
+  void addExpense() {
+    String name = nameController.text;
+    double amount = double.parse(amountController.text);
     DateTime? dateTime = selectedDateTime;
 
     FirebaseFirestore.instance.collection('expenses').add({
@@ -25,15 +26,15 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
     });
 
     // Clear the text fields after adding the expense
-    _nameController.clear();
-    _amountController.clear();
+    nameController.clear();
+    amountController.clear();
     setState(() {
       selectedCategory = null;
       selectedDateTime = null;
     });
   }
 
-  Future<void> _selectDateTime(BuildContext context) async {
+  Future<void> selectDateTime(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: selectedDateTime ?? DateTime.now(),
@@ -78,17 +79,19 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Expense Entry'),
+        title: CustomText(
+          text: 'Expenses Entry',
+          color: Colors.black,
+          fontWeight: FontWeight.bold,
+        ),
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
           children: [
-            TextField(
-              controller: _nameController,
-              decoration: InputDecoration(
-                labelText: 'Expense Name',
-              ),
+            CustomTextField(
+              controller: nameController,
+                labelText: 'Expense Name'
             ),
             PopupMenuButton<String>(
               onSelected: (category) {
@@ -97,6 +100,7 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
                 });
               },
               itemBuilder: (BuildContext context) => [
+                // ... List of PopupMenuItem
                 PopupMenuItem(
                   value: 'Food',
                   child: Text('Food'),
@@ -140,15 +144,14 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
               ),
             ),
             TextField(
-              controller: _amountController,
+              controller: amountController,
               keyboardType: TextInputType.number,
-              decoration: InputDecoration(
-                labelText: 'Amount',
-              ),
+                decoration: InputDecoration( labelText: 'Amount',
+                ),
             ),
             TextButton(
               onPressed: () {
-                _selectDateTime(context);
+                selectDateTime(context);
               },
               child: Text('Select Date and Time'),
             ),
@@ -157,7 +160,7 @@ class _ExpenseEntryPageState extends State<ExpenseEntryPage> {
             ),
             ElevatedButton(
               child: Text('Enter New Expense'),
-              onPressed: _addExpense,
+              onPressed: addExpense,
             ),
           ],
         ),
