@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:ma7fazti/home.dart';
+import 'package:ma7fazti/home.dart'
+import 'custom_widgets.dart';
 
 class SignInPage extends StatefulWidget {
   @override
@@ -67,33 +68,27 @@ class _SignInPageState extends State<SignInPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextField(
+            CustomTextField(
               controller: _emailController,
-              decoration: InputDecoration(
-                labelText: 'Email',
-              ),
+              labelText: 'Email',
             ),
             SizedBox(height: 16.0),
-            TextField(
+            CustomTextField(
               controller: _passwordController,
-              decoration: InputDecoration(
-                labelText: 'Password',
-              ),
+              labelText: 'Password',
               obscureText: true,
             ),
             SizedBox(height: 16.0),
-            ElevatedButton(
-              child: Text('Sign In'),
+            CustomButton(
+               text: 'Sign In',
               onPressed: _signIn,
             ),
             SizedBox(height: 16.0),
-            Text(
-              _message,
-              style: TextStyle(
+            CustomText(
+                text: _message,
                 color: Colors.red,
                 fontWeight: FontWeight.bold,
-              ),
-            ),
+                )
           ],
         ),
       ),
