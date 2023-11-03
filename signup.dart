@@ -66,52 +66,51 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-
   @override
-    Widget build(BuildContext context) {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text('Sign Up'),
-        ),
-        body: Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CustomText(
-                text: 'Welcome to Ma7fazti!',
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-              ),
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Sign Up'),
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CustomText(
+              text: 'Welcome to Ma7fazti!',
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+            ),
             SizedBox(height: 16.0),
-              CustomTextField(
+            CustomTextField(
               controller: _emailController,
               labelText: 'Email',
             ),
             SizedBox(height: 16.0),
-              CustomTextField(
+            CustomTextField(
               controller: _passwordController,
               labelText: 'Password',
             ),
             SizedBox(height: 16.0),
-              CustomButton(
+            CustomButton(
               text: 'Sign Up',
               onPressed: _signUp,
             ),
             SizedBox(height: 16.0),
-              CustomButton(
+            CustomButton(
               text: 'Already have an account? Sign In',
               onPressed: _goToSignInPage,
             ),
-             SizedBox(height: 18.0),
-                CustomText(
-                text: _message,
-                color: Colors.red,
-                fontWeight: FontWeight.bold,
+            SizedBox(height: 18.0),
+            CustomText(
+              text: _message,
+              color: Colors.red,
+              fontWeight: FontWeight.bold,
             ),
           ],
-         ),
         ),
-      );
-    }
+      ),
+    );
   }
+}
