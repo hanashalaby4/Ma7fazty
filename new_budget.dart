@@ -39,10 +39,12 @@ class _BudgetSettingsPageState extends State<BudgetSettingsPage> {
                   monthlyBudget = double.tryParse(nonNullValue) ?? 0;
                 },
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
+                  // Provide a default value (empty string) if value is null before validation
+                  final nonNullValue = value ?? '';
+                  if (nonNullValue.isEmpty) {
                     return 'Please enter your monthly budget';
                   }
-                  if (double.tryParse(value) == null) {
+                  if (double.tryParse(nonNullValue) == null) {
                     return 'Please enter a valid number';
                   }
                   return null;
