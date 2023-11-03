@@ -11,15 +11,15 @@ class CustomButton extends StatelessWidget {
     required this.text,
     required this.onPressed,
     this.color = Colors.blue,
-}) : super(key: key); //passing key to stateless widget constructor
+  }) : super(key: key); //passing key to stateless widget constructor
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: color,
-        ),
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        backgroundColor: color,
+      ),
       child: Text(text),
 
     );
@@ -36,7 +36,7 @@ class CustomTextField extends StatelessWidget {
     required this.controller,
     required this.labelText,
     this.obscureText = false,
-}) : super(key: key);
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

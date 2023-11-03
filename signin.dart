@@ -19,11 +19,11 @@ class _SignInPageState extends State<SignInPage> {
         password: _passwordController.text,
       );
 
-      // Navigate to the home page or any other page after successful sign in
+      // Navigate to the home page with user credentials
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => HomePage(userName: 'John'), // Pass the user's name here
+          builder: (context) => HomePage(userCredential), // Pass the user credentials here
         ),
       );
     } catch (e) {
@@ -55,6 +55,7 @@ class _SignInPageState extends State<SignInPage> {
       }
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
