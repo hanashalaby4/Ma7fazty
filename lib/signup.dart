@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ma7fazti/signin.dart';
+import 'custom_widgets.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -18,7 +20,14 @@ class _SignUpPageState extends State<SignUpPage> {
         email: _emailController.text,
         password: _passwordController.text,
       );
-
+      Fluttertoast.showToast(
+        msg: "Sign up successful!",
+        toastLength: Toast.LENGTH_SHORT, // Duration for which the toast should be visible (Toast.LENGTH_SHORT or Toast.LENGTH_LONG)
+        gravity: ToastGravity.BOTTOM, // Position of the toast on the screen (ToastGravity.TOP, ToastGravity.CENTER, or ToastGravity.BOTTOM)
+        backgroundColor: Colors.grey[700], // Background color of the toast
+        textColor: Colors.white, // Text color of the toast
+        fontSize: 16.0, // Font size of the toast text
+      );
       // Additional logic to store the user's name in Firestore or Realtime Database
       // You can use userCredential.user.uid as the user's unique identifier
 
@@ -76,45 +85,36 @@ class _SignUpPageState extends State<SignUpPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              'Welcome to Ma7fazti!',
-              style: TextStyle(
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold,
-              ),
+            CustomText(
+              text: 'Welcome to Ma7fazti!',
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
             ),
             SizedBox(height: 16.0),
-            TextField(
+            CustomTextField(
               controller: _emailController,
-              decoration: InputDecoration(
-                labelText: 'Email',
-              ),
+              labelText: 'Email',
             ),
             SizedBox(height: 16.0),
-            TextField(
+            CustomTextField(
               controller: _passwordController,
-              decoration: InputDecoration(
-                labelText: 'Password',
-              ),
-              obscureText: true,
+              labelText: 'Password',
             ),
             SizedBox(height: 16.0),
-            ElevatedButton(
-              child: Text('Sign Up'),
+            CustomButton(
+              text: 'Sign Up',
               onPressed: _signUp,
             ),
             SizedBox(height: 16.0),
-            ElevatedButton(
-              child: Text('Already have an account? Sign In'),
+            CustomButton(
+              text: 'Already have an account? Sign In',
               onPressed: _goToSignInPage,
             ),
             SizedBox(height: 18.0),
-            Text(
-              _message,
-              style: TextStyle(
-                color: Colors.red,
-                fontWeight: FontWeight.bold,
-              ),
+            CustomText(
+              text: _message,
+              color: Colors.red,
+              fontWeight: FontWeight.bold,
             ),
           ],
         ),

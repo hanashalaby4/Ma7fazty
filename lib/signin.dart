@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ma7fazti/home.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class SignInPage extends StatefulWidget {
   @override
@@ -18,12 +19,19 @@ class _SignInPageState extends State<SignInPage> {
         email: _emailController.text,
         password: _passwordController.text,
       );
-
-      // Navigate to the home page or any other page after successful sign in
+      Fluttertoast.showToast(
+        msg: "Sign in successful!",
+        toastLength: Toast.LENGTH_SHORT, // Duration for which the toast should be visible (Toast.LENGTH_SHORT or Toast.LENGTH_LONG)
+        gravity: ToastGravity.BOTTOM, // Position of the toast on the screen (ToastGravity.TOP, ToastGravity.CENTER, or ToastGravity.BOTTOM)
+        backgroundColor: Colors.grey[700], // Background color of the toast
+        textColor: Colors.white, // Text color of the toast
+        fontSize: 16.0, // Font size of the toast text
+      );
+      // Navigate to the home page with user credentials
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => HomePage(userName: 'John'), // Pass the user's name here
+          builder: (context) => HomePage(userCredential), // Pass the user credentials here
         ),
       );
     } catch (e) {
@@ -55,6 +63,7 @@ class _SignInPageState extends State<SignInPage> {
       }
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
