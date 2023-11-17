@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ma7fazti/signin.dart';
 import 'custom_widgets.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -15,15 +16,29 @@ class _SignUpPageState extends State<SignUpPage> {
 
   Future<void> _signUp() async {
     try {
+      String password = _passwordController.text;
+      if (!_isValidPassword(password)) {
+        setState(() {
+          _message = 'The password must be at least 12 characters long and contain a combination of uppercase letters, lowercase letters, numbers, and special characters.';
+        });
+        return;
+      }
+
       UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: _emailController.text,
-        password: _passwordController.text,
+        password: password,
       );
-
+      Fluttertoast.showToast(
+        msg: "Sign up successful!",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        backgroundColor: Colors.grey[700],
+        textColor: Colors.white,
+        fontSize: 16.0,
+      );
       // Additional logic to store the user's name in Firestore or Realtime Database
       // You can use userCredential.user.uid as the user's unique identifier
 
-      // Navigate to the home page or any other page after successful sign up
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => SignInPage()),
@@ -31,7 +46,6 @@ class _SignUpPageState extends State<SignUpPage> {
     } catch (e) {
       print('Sign up failed: $e');
 
-      // Check the error type and access the code property
       if (e is FirebaseAuthException) {
         if (e.code == 'weak-password') {
           setState(() {
@@ -56,6 +70,20 @@ class _SignUpPageState extends State<SignUpPage> {
         });
       }
     }
+  }
+
+  bool _isValidPassword(String password) {
+    // Password validation using regular expressions
+    RegExp lowercaseRegex = RegExp(r'[a-z]');
+    RegExp uppercaseRegex = RegExp(r'[A-Z]');
+    RegExp digitRegex = RegExp(r'\d');
+    RegExp specialCharRegex = RegExp(r'[!@#$%^&*(),.?":{}|<>]');
+
+    return password.length >= 12 &&
+        lowercaseRegex.hasMatch(password) &&
+        uppercaseRegex.hasMatch(password) &&
+        digitRegex.hasMatch(password) &&
+        specialCharRegex.hasMatch(password);
   }
 
 
