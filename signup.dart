@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:ma7fazti/customer_support.dart';
 import 'package:ma7fazti/signin.dart';
 import 'custom_widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -93,7 +94,12 @@ class _SignUpPageState extends State<SignUpPage> {
       MaterialPageRoute(builder: (context) => SignInPage()),
     );
   }
-
+  void _goToCustomerSupportPage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => CustomerSupportPage()),
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -129,6 +135,11 @@ class _SignUpPageState extends State<SignUpPage> {
             CustomButton(
               text: 'Already have an account? Sign In',
               onPressed: _goToSignInPage,
+            ),
+            SizedBox(height: 16.0),
+            CustomButton(
+              text: 'Are you facing a problem? Report the issue to customer support.',
+              onPressed: _goToCustomerSupportPage,
             ),
             SizedBox(height: 18.0),
             CustomText(
