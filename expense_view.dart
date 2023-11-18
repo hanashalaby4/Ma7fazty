@@ -31,76 +31,79 @@ class ExpenseViewPage extends StatelessWidget {
         title: Text('Expense View'),
       ),
       body: Column(
-        children: [
+          children: [
 
-          Expanded(
-            flex: 2,
-            child: FutureBuilder<List<ExpenseData>>(
-              future: fetchExpenseData(),
+            Expanded(
+              flex: 2,
+              child: FutureBuilder<List<ExpenseData>>(
+                future: fetchExpenseData(),
                 builder: (context, snapshot) {
-                  if (snapshot.connectionState ==ConnectionState.waiting) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
                     return Center(child: CircularProgressIndicator());
                   }
                   if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                    return Center ( child:
-                      CustomText(
+                    return Center(child:
+                    CustomText(
                       text: 'No expense data available for chart.',
                       fontWeight: FontWeight.bold,
-                      color: Colors.black ,
-                      )
+                      color: Colors.black,
+                    )
                     );
                   }
-                return ExpenseLineChart (expenseData: snapshot.data!);
-               },
+                  return ExpenseLineChart(expenseData: snapshot.data!);
+                },
               ),
-             ),
-            Expanded (
-              flex:3,
-              child: StreamBuilder<QuerySnapshot>(
-                stream: _firestore.collection('expenses').snapshots(),
-                builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                  if (!snapshot.hasData) {
-                    return Center(
-                    child: CircularProgressIndicator(),
-                    );
-                  }
+            ),
+            Expanded(
+                flex: 3,
+                child: StreamBuilder<QuerySnapshot>(
+                    stream: _firestore.collection('expenses').snapshots(),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<QuerySnapshot> snapshot) {
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
 
-                  final expenses = snapshot.data!.docs;
+                      final expenses = snapshot.data!.docs;
 
-                    return ListView.builder(
-                      itemCount: expenses.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        final expense = expenses[index];
+                      return ListView.builder(
+                          itemCount: expenses.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            final expense = expenses[index];
 
-                        final name = expense['name'];
-                        final category = expense['category'];
-                        final amount = expense['amount'];
-                        final dateTime = expense['dateTime'].toDate();
+                            final name = expense['name'];
+                            final category = expense['category'];
+                            final amount = expense['amount'];
+                            final dateTime = expense['dateTime'].toDate();
 
-                        final formattedDateTime = DateFormat('MM/dd/yyyy HH:mm').format(dateTime);
+                            final formattedDateTime = DateFormat(
+                                'MM/dd/yyyy HH:mm').format(dateTime);
 
-                        return ListTile(
-                      title:Text(name),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('Category:$category'),
-                            Text('Amount:$amount'),
-                            Text('Date and Time: $formattedDateTime'),
-    ],
-    )
-    );
-    }
-                    );
-    }
-              )
+                            return ListTile(
+                                title: Text(name),
+                                subtitle: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('Category:$category'),
+                                    Text('Amount:$amount'),
+                                    Text('Date and Time: $formattedDateTime'),
+                                  ],
+                                )
+                            );
+                          }
+                      );
+                    }
+                )
 
 
-    )
-        ]
-    ),
+            )
+          ]
+      ),
     );
   }
+}
 
 
 
@@ -129,8 +132,7 @@ class ExpenseViewPage extends StatelessWidget {
 
 
 
-
- /*     StreamBuilder<QuerySnapshot>(
+/*     StreamBuilder<QuerySnapshot>(
         stream: _firestore.collection('expenses').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (!snapshot.hasData) {
@@ -171,5 +173,4 @@ class ExpenseViewPage extends StatelessWidget {
     );
   }
 }*/
-
 
