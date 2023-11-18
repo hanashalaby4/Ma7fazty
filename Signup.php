@@ -60,7 +60,7 @@ p{
         input[type="password"]:hover,
         input[type="tel"]:hover,
         select:hover {
-            border-color: #8a8f92; 
+            border-color: #8a8f92;
         }
 
         #terms_agreement {
@@ -90,6 +90,11 @@ p{
             transform: scale(1.3);
             transition: transform 0.3s;
         }
+        a::before {
+            content: "*";
+            margin-right: 4px;
+            color: red;
+        }
     </style>
 </head>
 <body>
@@ -97,21 +102,25 @@ p{
         <h1>Create Account</h1>
         <form action="your_registration_handler.php" method="post">
             <!-- First Name (Required) -->
+            <a>
             <label for="first_name">First Name:</label>
             <input type="text" id="first_name" name="first_name" required>
-
+    </a>
+    <a>
             <!-- Last Name (Required) -->
             <label for="last_name">Last Name:</label>
             <input type="text" id="last_name" name="last_name" required>
-
+    </a>
+    <a>
             <!-- Email (Required) -->
             <label for="email">Email:</label>
             <input type="email" id="email" name "email" required>
-
+    </a>
+    <a>
             <!-- Password (Required) -->
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
-
+    </a>
             <!-- Phone Number (Optional) -->
             <label for="phone_number">Phone Number:</label>
             <input type="tel" id="phone_number" name="phone_number">
