@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
+import 'expense_data.dart'
 
 class ExpenseViewPage extends StatelessWidget {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -51,4 +52,20 @@ class ExpenseViewPage extends StatelessWidget {
       ),
     );
   }
+}
+
+Future<List<ExpenseData>> fetchExpenseData() async {
+  QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('expenses').get();
+  List<ExpenseData> expenseData = [];
+
+  for (var doc in querySnapshot.docs) {
+    final data = doc.data() as Map<String, dynamic>;
+    final date = (data['dateTime'] as Timestamp).toDate();
+    final amount = data['amount'] as double;
+    final category = data['category'] as String;  // Extract category
+
+    expenseData.add(ExpenseData(date, amount, category));
+  }
+
+  return expenseData;
 }
