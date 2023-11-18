@@ -1,4 +1,30 @@
 import 'package:flutter/material.dart';
+import 'expense_data.dart';
+import 'package:fl_chart/fl_chart.dart';
+
+class ExpenseLineChart extends StatelessWidget {
+  final List<ExpenseData> expenseData;
+
+  const ExpenseLineChart({Key? key, required this.expenseData}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    List<FlSpot> spots = expenseData
+        .map((data) => FlSpot(data.date.millisecondsSinceEpoch.toDouble(), data.amount))
+        .toList();
+
+    return LineChart(
+      LineChartData(
+        gridData: FlGridData(show: false),
+        titlesData: FlTitlesData(show: false),
+        borderData: FlBorderData(show: false),
+        lineBarsData: [
+          LineChartBarData(spots: spots, isCurved: true),
+        ],
+      ),
+    );
+  }
+}
 
 class CustomButton extends StatelessWidget {
 

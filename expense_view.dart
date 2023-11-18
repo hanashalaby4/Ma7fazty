@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
-import 'expense_data.dart'
+import 'expense_data.dart';
+import 'custom_widgets.dart';
 
 class ExpenseViewPage extends StatelessWidget {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -54,18 +55,19 @@ class ExpenseViewPage extends StatelessWidget {
   }
 }
 
+// Fetches data from firestore and turns it into a List of ExpenseData items
 Future<List<ExpenseData>> fetchExpenseData() async {
   QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection('expenses').get();
-  List<ExpenseData> expenseData = [];
+  List<ExpenseData> expenseData = []; // Creates the list
 
-  for (var doc in querySnapshot.docs) {
+  for (var doc in querySnapshot.docs) { // Iterating over documents
     final data = doc.data() as Map<String, dynamic>;
     final date = (data['dateTime'] as Timestamp).toDate();
     final amount = data['amount'] as double;
-    final category = data['category'] as String;  // Extract category
+    final category = data['category'] as String;  // Extract info for each expense
 
-    expenseData.add(ExpenseData(date, amount, category));
+    expenseData.add(ExpenseData(date, amount, category)); // Adds document to list
   }
 
-  return expenseData;
+  return expenseData; // Returns list
 }
