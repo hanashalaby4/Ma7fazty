@@ -89,15 +89,18 @@ class ExpenseViewPage extends StatelessWidget {
                             Text('Date and Time: $formattedDateTime'),
     ],
     )
-    )
+    );
     }
-                    )
+                    );
     }
-    }
+              )
+
 
     )
+        ]
     ),
-}
+    );
+  }
 
 
 
