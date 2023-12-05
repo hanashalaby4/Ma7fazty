@@ -114,7 +114,7 @@
     <div style="width: 297px; height: 76px; left: 147px; top: 133px; position: absolute; color: white; font-size: 51px; font-family: Inter; font-weight: 400; word-wrap: break-word">A7FAZTY</div>
     <img style="width: 33px; height: 32px; left: 98px; top: 280px; position: absolute" src="User.png" />
     <img style="width: 33px; height: 32px; left: 98px; top: 363px; position: absolute" src="Lock.png" />
-    <img style="width: 368px; height: 106px; left: 77px; top: 115px; position: absolute" src="Logo.png" />
+    <img style="width: 368px; height: 106px; left: 77px; top: 115px; position: absolute" src="Pic.png" />
     <div style="left: 98px; top: 209px; position: absolute; color: white; font-size: 12px; font-family: Inter; font-weight: 400; word-wrap: break-word">WHERE FINANCIAL MANAGEMENT MEETS SIMPLICITY</div>
   </div>
 	<img style="position: absolute; right: 10px; top: 10px; width: 100px; height: 50px;" src="Palestine.jpg" alt="Corner Image">
