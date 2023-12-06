@@ -1,30 +1,19 @@
 import 'package:flutter/material.dart';
-import 'expense_data.dart';
-import 'package:fl_chart/fl_chart.dart';
+import 'color.dart';
 
-class ExpenseLineChart extends StatelessWidget {
-  final List<ExpenseData> expenseData;
+final ButtonStyle buttonPrimary = ElevatedButton.styleFrom(
+  foregroundColor: blackPrimary,
+  minimumSize: Size(327, 50),
+  backgroundColor: cyan,
+  elevation: 0,
+  shape: const RoundedRectangleBorder(
+    borderRadius: BorderRadius.all(Radius.circular(50),
+    )
+  )
 
-  const ExpenseLineChart({Key? key, required this.expenseData}) : super(key: key);
+);
 
-  @override
-  Widget build(BuildContext context) {
-    List<FlSpot> spots = expenseData
-        .map((data) => FlSpot(data.date.millisecondsSinceEpoch.toDouble(), data.amount))
-        .toList();
 
-    return LineChart(
-      LineChartData(
-        gridData: FlGridData(show: false),
-        titlesData: FlTitlesData(show: false),
-        borderData: FlBorderData(show: false),
-        lineBarsData: [
-          LineChartBarData(spots: spots, isCurved: true),
-        ],
-      ),
-    );
-  }
-}
 
 class CustomButton extends StatelessWidget {
 
@@ -57,13 +46,15 @@ class CustomTextField extends StatelessWidget {
   final String labelText;
   final bool obscureText;
   final bool keyboardType;
+  final TextStyle textStyle;
 
   const CustomTextField ({
     Key? key,
     required this.controller,
     required this.labelText,
     this.obscureText = false,
-    this.keyboardType =
+    this.keyboardType = false,
+    required this.textStyle
  }) : super(key: key);
 
   @override
@@ -83,12 +74,14 @@ class CustomText extends StatelessWidget {
   final double fontSize;
   final FontWeight fontWeight;
   final Color color;
+  final FontStyle fontStyle;
 
   const CustomText({
     Key? key,
     required this.text,
     this.fontSize = 16.0,
     this.fontWeight = FontWeight.normal,
+    this.fontStyle = FontStyle.normal,
     this.color = Colors.black,
   }) : super(key: key);
 
