@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'color.dart';
+
 
 class BudgetViewPage extends StatefulWidget {
   @override
@@ -53,24 +55,52 @@ class _BudgetViewPageState extends State<BudgetViewPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Budget View'),
+          title: const Text('View budget'),
+          centerTitle: true,
+          backgroundColor: cyan,
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(25),
+                bottomRight: Radius.circular(25),
+              )
+          )
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Monthly Budget: ${monthlyBudget.toStringAsFixed(2)}',
-              style: TextStyle(fontSize: 24),
-            ),
-            SizedBox(height: 16),
-            Text(
-              'Remaining Budget: ${remainingBudget.toStringAsFixed(2)}',
-              style: TextStyle(fontSize: 24),
-            ),
-          ],
-        ),
-      ),
+       body: Padding(
+         padding: EdgeInsets.all(16.0),
+         child: Column(
+           children: [
+             Align(
+               alignment: Alignment.topLeft,
+               child: Image.asset(
+                 'assets/images/logo3.png',
+                 width: 100,
+                 fit: BoxFit.contain,
+               ),
+             ),
+           Center(
+               child: Column(
+                 mainAxisAlignment: MainAxisAlignment.center,
+                 children: [
+                   Text(
+                     'Monthly Budget: ${monthlyBudget.toStringAsFixed(2)}',
+                     style: TextStyle(fontSize: 24,
+                         color: cyan),
+                   ),
+                   SizedBox(height: 16),
+                   Text(
+                     'Remaining Budget: ${remainingBudget.toStringAsFixed(2)}',
+                     style: TextStyle(fontSize: 24,
+                         color: cyan
+                     ),
+                   ),
+                 ],
+               ),
+             ),
+           ],
+         )
+       )
+  
     );
   }
 }
+
